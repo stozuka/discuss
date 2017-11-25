@@ -12,6 +12,13 @@ defmodule Discuss.AuthController do
       provider: auth.provider
     }
 
+    IO.puts "+++ user_params +++"
+    IO.inspect user_params
+    IO.puts "+++"
+    IO.puts "+++ auth +++"
+    IO.inspect auth
+    IO.puts "+++"
+
     changeset = User.changeset(%User{}, user_params)
 
     signin(conn, changeset)

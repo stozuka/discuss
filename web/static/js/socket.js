@@ -14,7 +14,6 @@ const createSocket = topicId => {
     .receive('ok', resp => {
       console.log(resp);
       renderComments(resp.comments);
-      document.querySelector('textarea').innerHTML = '';
     })
     .receive('error', resp => {
       console.log('Unable to join', resp);
@@ -26,6 +25,8 @@ const createSocket = topicId => {
     const content = document.querySelector('textarea').value;
 
     channel.push('comment:add', { content: content });
+
+    document.querySelector('textarea').innerHTML = '';
   });
 };
 

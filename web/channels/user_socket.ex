@@ -4,7 +4,7 @@ defmodule Discuss.UserSocket do
   channel "comments:*", Discuss.CommentsChannel
 
   transport :websocket, Phoenix.Transports.WebSocket,
-    timeout: 40_000,
+    timeout: 30_000,
     check_origin: false
     # check_origin: ["phoenixdiscuss.herokuapp.com"]
 

@@ -25,7 +25,7 @@ defmodule Discuss.AuthController do
         |> put_session(:user_id, user.id)
         |> redirect(to: topic_path(conn, :index))
       {:error, reason} ->
-        IO.puts reason
+        IO.inspect reason
         conn
         |> put_flash(:error, "Error signing in")
         |> redirect(to: topic_path(conn, :index))

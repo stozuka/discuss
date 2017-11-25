@@ -1,6 +1,7 @@
 import { Socket } from "phoenix"
 
-let socket = new Socket("/socket", { params: { token: window.userToken } })
+// let socket = new Socket("/socket", { params: { token: window.userToken } })
+let socket = new Socket("wss://phoenixdiscuss.herokuapp.com/socket", { params: { token: window.userToken } })
 
 socket.connect()
 

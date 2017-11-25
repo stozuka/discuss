@@ -13,11 +13,11 @@ use Mix.Config
 # which you typically run after static files are built.
 config :discuss, Discuss.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: "phoenixdiscuss.herokuapp.com", port: 443],
+  # url: [scheme: "https", host: "phoenixdiscuss.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "localhost", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE"),
-  check_origin: false
 
 # Do not print debug messages in production
 config :logger, level: :info

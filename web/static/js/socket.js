@@ -14,6 +14,7 @@ const createSocket = topicId => {
     .receive('ok', resp => {
       console.log(resp);
       renderComments(resp.comments);
+      document.querySelector('textarea').value.innerHTML = '';
     })
     .receive('error', resp => {
       console.log('Unable to join', resp);

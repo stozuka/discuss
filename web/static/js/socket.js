@@ -28,9 +28,6 @@ const createSocket = topicId => {
       .receive('ok', resp => {
         document.querySelector('textarea').value = '';
       });
-
-    // channel.push('comment:add', { content: content });
-    // document.querySelector('textarea').value = '';
   });
 };
 

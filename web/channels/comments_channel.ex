@@ -25,7 +25,7 @@ defmodule Discuss.CommentsChannel do
           socket, "comments:#{socket.assigns.topic.id}:new",
           %{comment: comment}
         )
-        {:reply, :ok, socket}
+        {:reply, {:ok, topic}, socket}
       {:error, _reason} ->
         {:reply, {:error, %{errors: changeset}}, socket}
     end

@@ -12,23 +12,12 @@ defmodule Discuss.AuthController do
       provider: Atom.to_string(auth.provider)
     }
 
-    IO.puts "+++ user_params +++"
-    IO.inspect user_params
-    IO.puts "+++"
-    IO.puts "+++ auth +++"
-    IO.inspect auth
-    IO.puts "+++"
-
     changeset = User.changeset(%User{}, user_params)
 
     signin(conn, changeset)
   end
 
   defp signin(conn, changeset) do
-    IO.puts "+++"
-    IO.inspect changeset
-    IO.puts "+++"
-
     case insert_or_update_user(changeset) do
       {:ok, user} ->
         conn
@@ -36,10 +25,6 @@ defmodule Discuss.AuthController do
         |> put_session(:user_id, user.id)
         |> redirect(to: topic_path(conn, :index))
       {:error, reason} ->
-        IO.puts "+++"
-        IO.inspect reason
-        IO.puts "+++"
-
         conn
         |> put_flash(:error, "Error signing in")
         |> redirect(to: topic_path(conn, :index))

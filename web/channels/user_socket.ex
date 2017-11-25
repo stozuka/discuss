@@ -3,10 +3,7 @@ defmodule Discuss.UserSocket do
 
   channel "comments:*", Discuss.CommentsChannel
 
-  transport :websocket, Phoenix.Transports.WebSocket,
-    timeout: 45_000,
-    check_origin: false
-    # check_origin: ["phoenixdiscuss.herokuapp.com"]
+  transport :websocket, Phoenix.Transports.WebSocket
 
   def connect(%{"token" => token}, socket) do
     case Phoenix.Token.verify(socket, "key", token) do

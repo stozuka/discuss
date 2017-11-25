@@ -1,6 +1,5 @@
 defmodule Discuss.CommentsChannel do
   use Discuss.Web, :channel
-
   alias Discuss.{Topic, Comment}
 
   def join("comments:" <> topic_id, _params, socket) do
@@ -22,7 +21,9 @@ defmodule Discuss.CommentsChannel do
 
     case Repo.insert(changeset) do
       {:ok, comment} ->
-        broadcast!(socket, "comments:#{socket.assigns.topic.id}:new", %{comment: comment})
+        broadcast!(socket, "comments:#{socket.assigns.topic.id}:new",
+          %{comment: comment}
+        )
         {:reply, :ok, socket}
       {:error, _reason} ->
         {:reply, {:error, %{errors: changeset}}, socket}

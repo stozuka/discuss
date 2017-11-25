@@ -1,19 +1,22 @@
-import { Socket } from "phoenix"
+import { Socket } from 'phoenix';
 
-let socket = new Socket("/socket", { params: { token: window.userToken } })
-// let socket = new Socket("wss://phoenixdiscuss.herokuapp.com/socket", { params: { token: window.userToken } })
+let socket;
 
-socket.connect()
+if (window.userToken) {
+  socket = new Socket('/socket', { params: { token: window.userToken } });
+  socket.connect();
+}
 
-const createSocket = (topicId) => {
-  let channel = socket.channel(`comments:${topicId}`, {})
-
-  channel.join()
-    .receive("ok", resp => {
+const createSocket = topicId => {
+  let channel = socket.channel(`comments:${topicId}`, {});
+  channel
+    .join()
+    .receive('ok', resp => {
+      console.log(resp);
       renderComments(resp.comments);
     })
-    .receive("error", resp => {
-      console.log("Unable to join", resp);
+    .receive('error', resp => {
+      console.log('Unable to join', resp);
     });
 
   channel.on(`comments:${topicId}:new`, renderComment);
@@ -41,7 +44,6 @@ function renderComment(event) {
 
 function commentTemplate(comment) {
   let email = 'Anonymous';
-
   if (comment.user) {
     email = comment.user.email;
   }

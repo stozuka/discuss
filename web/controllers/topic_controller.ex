@@ -3,7 +3,7 @@ defmodule Discuss.TopicController do
 
   alias Discuss.Topic
 
-  plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+  plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete, :show]
   plug :check_topic_owner when action in [:update, :edit, :delete]
 
   def index(conn, _params) do
@@ -18,6 +18,7 @@ defmodule Discuss.TopicController do
 
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
+
     render conn, "new.html", changeset: changeset
   end
 
@@ -39,6 +40,7 @@ defmodule Discuss.TopicController do
   def edit(conn, %{"id" => topic_id}) do
     topic = Repo.get(Topic, topic_id)
     changeset = Topic.changeset(topic)
+
     render conn, "edit.html", changeset: changeset, topic: topic
   end
 
@@ -71,7 +73,7 @@ defmodule Discuss.TopicController do
       conn
     else
       conn
-      |> put_flash(:error, "You cannot edit that.")
+      |> put_flash(:error, "You cannot edit that")
       |> redirect(to: topic_path(conn, :index))
       |> halt()
     end

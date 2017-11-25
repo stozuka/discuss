@@ -24,9 +24,13 @@ const createSocket = topicId => {
   document.querySelector('button').addEventListener('click', () => {
     const content = document.querySelector('textarea').value;
 
-    channel.push('comment:add', { content: content });
+    channel.push('comment:add', { content: content })
+      .receive('ok', resp => {
+        document.querySelector('textarea').value = '';
+      });
 
-    document.querySelector('textarea').value = '';
+    // channel.push('comment:add', { content: content });
+    // document.querySelector('textarea').value = '';
   });
 };
 

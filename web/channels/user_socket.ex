@@ -5,7 +5,8 @@ defmodule Discuss.UserSocket do
 
   transport :websocket, Phoenix.Transports.WebSocket,
     timeout: 45_000,
-    check_origin:  ["phoenixdiscuss.herokuapp.com"]
+    check_origin: false
+    # check_origin: ["phoenixdiscuss.herokuapp.com"]
 
   def connect(%{"token" => token}, socket) do
     case Phoenix.Token.verify(socket, "key", token) do

@@ -9,7 +9,7 @@ defmodule Discuss.AuthController do
     user_params = %{
       token: auth.credentials.token,
       email: auth.info.email,
-      provider: String.to_string(auth.provider)
+      provider: Atom.to_string(auth.provider)
     }
 
     IO.puts "+++ user_params +++"

@@ -26,7 +26,7 @@ const createSocket = topicId => {
 
     channel.push('comment:add', { content: content });
 
-    document.querySelector('textarea').innerHTML = '';
+    document.querySelector('textarea').value = '';
   });
 };
 
